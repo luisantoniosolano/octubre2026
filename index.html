@@ -32,17 +32,6 @@ h1 span{background:linear-gradient(90deg,#ff9dcc,#d9a5ff,#91c9ff);-webkit-backgr
 .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:9px}
 .day{min-height:76px;border:1px solid #ffffff18;border-radius:18px;background:linear-gradient(145deg,#ffffff12,#ffffff06);color:#fff;cursor:pointer;transition:.25s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:700;position:relative;overflow:hidden}
 .day:hover:not(.locked){transform:translateY(-4px) scale(1.02);border-color:#ff9dcc88;box-shadow:0 12px 28px #ff62ad2b}
-
-.heart-pop{position:relative;text-align:center;font-size:3.2rem;line-height:1;margin:2px 0 18px;animation:heartPop .8s cubic-bezier(.2,.8,.3,1) both;filter:drop-shadow(0 0 10px #ff4f9a88)}
-.heart-pop::after{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;border:2px solid #ff8fc5;border-radius:50%;transform:translate(-50%,-50%) scale(.2);opacity:0;animation:heartRing .9s .12s ease-out both}
-@keyframes heartPop{0%{opacity:0;transform:scale(.25) translateY(12px)}55%{opacity:1;transform:scale(1.18) translateY(0)}75%{transform:scale(.94)}100%{opacity:1;transform:scale(1)}}
-@keyframes heartRing{0%{opacity:.9;transform:translate(-50%,-50%) scale(.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(5)}}
-.signature{margin:24px 0 2px;text-align:right;color:#ffc3e2;font-weight:700;font-size:1rem;text-shadow:0 0 12px #ff77b766}
-.rose{width:30px;height:30px;position:relative;display:block;margin-bottom:1px;filter:drop-shadow(0 0 5px #ff315c55);transition:transform .25s ease,filter .25s ease;animation:roseAppear .55s ease both}
-.rose::before{content:"";position:absolute;width:19px;height:19px;left:5px;top:3px;border-radius:50% 45% 55% 48%;background:radial-gradient(circle at 52% 50%,#7b001b 0 13%,transparent 14%),radial-gradient(circle at 35% 34%,#ff6b82 0 24%,transparent 25%),radial-gradient(circle at 67% 35%,#e31b45 0 31%,transparent 32%),radial-gradient(circle at 51% 68%,#b8002b 0 38%,#7e001c 39% 100%);transform:rotate(-12deg);box-shadow:0 0 7px #ff315c66}
-.rose::after{content:"";position:absolute;width:7px;height:13px;left:12px;top:20px;background:linear-gradient(90deg,#276b3a,#62b85d);border-radius:2px 7px 2px 7px;transform:rotate(14deg);box-shadow:-6px 3px 0 -1px #39834a}
-.day:hover:not(.locked) .rose{transform:scale(1.18) rotate(-3deg);filter:drop-shadow(0 0 9px #ff315c) drop-shadow(0 0 16px #ff8da2)}
-@keyframes roseAppear{from{opacity:0;transform:scale(.55) translateY(5px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .day small{font-size:.7rem;opacity:.65}
 .day.locked{cursor:not-allowed;opacity:.38;filter:saturate(.5)}
 .day.unlocked{background:linear-gradient(145deg,#ff71b72b,#8e5be92b)}
@@ -58,6 +47,33 @@ footer{text-align:center;margin-top:30px;color:#c9b0d7;font-size:.8rem}
 .message{font-size:1.05rem;line-height:1.85;color:#fff7ff}
 .birthdayTitle{font-size:clamp(1.7rem,6vw,3rem);text-align:center;background:linear-gradient(90deg,#ff8fc5,#ffd1e9,#a8c7ff);-webkit-background-clip:text;color:transparent}
 .heart{text-align:center;font-size:2.5rem;margin:5px 0 14px;animation:pulse 1.7s infinite}
+
+.rose{
+  width:28px;height:32px;position:relative;display:block;
+  filter:drop-shadow(0 0 4px rgba(255,40,70,.35));
+  transition:transform .3s ease,filter .3s ease;
+}
+.rose::before{
+  content:"🌹";font-size:24px;position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-52%);line-height:1;
+}
+.day:hover:not(.locked) .rose{
+  transform:scale(1.18) rotate(-3deg);
+  filter:drop-shadow(0 0 5px #ff405f) drop-shadow(0 0 12px rgba(255,80,100,.85));
+  animation:roseGlow .9s ease-in-out infinite alternate;
+}
+.day.opening .rose{
+  animation:roseOpen .8s ease both;
+}
+@keyframes roseGlow{
+  from{filter:drop-shadow(0 0 4px #ff405f) drop-shadow(0 0 7px rgba(255,80,100,.45))}
+  to{filter:drop-shadow(0 0 7px #fff) drop-shadow(0 0 17px #ff405f)}
+}
+@keyframes roseOpen{
+  0%{transform:scale(.65);filter:brightness(1)}
+  45%{transform:scale(1.3);filter:brightness(1.45) drop-shadow(0 0 14px #fff)}
+  100%{transform:scale(1);filter:brightness(1) drop-shadow(0 0 5px #ff405f)}
+}
 @media(max-width:620px){main{padding:25px 11px 50px}.calendar{gap:6px}.day{min-height:61px;border-radius:14px;font-size:.95rem}.day small{font-size:.62rem}.card{padding:12px;border-radius:22px}.dialog{padding:23px 18px;border-radius:24px}.message{font-size:.98rem;line-height:1.75}}
 </style>
 </head>
@@ -65,42 +81,42 @@ footer{text-align:center;margin-top:30px;color:#c9b0d7;font-size:.8rem}
 <div id="sky"></div><div class="garden" id="garden"></div>
 <main>
 <section class="hero">
-<div class="badge">31 días. octubre. para mi Valen 🪐</div>
+<div class="badge">31 días • octubre • para alguien especial</div>
 <h1>Octubre para <span>Valen 🪐</span></h1>
 <p class="subtitle">Un pequeño rincón hecho para recordarte, poquito a poquito, lo mucho que significas.</p>
 </section>
 <section class="card">
-<div class="calendar" id="calendar"><button class="day " data-day="1" aria-label="Día 1"><span>1</span><small>♡</small></button>
-<button class="day " data-day="2" aria-label="Día 2"><span>2</span><small>♡</small></button>
-<button class="day " data-day="3" aria-label="Día 3"><span>3</span><small>♡</small></button>
-<button class="day " data-day="4" aria-label="Día 4"><span>4</span><small>♡</small></button>
-<button class="day " data-day="5" aria-label="Día 5"><span>5</span><small>♡</small></button>
-<button class="day " data-day="6" aria-label="Día 6"><span>6</span><small>♡</small></button>
-<button class="day " data-day="7" aria-label="Día 7"><span>7</span><small>♡</small></button>
-<button class="day " data-day="8" aria-label="Día 8"><span>8</span><small>♡</small></button>
-<button class="day " data-day="9" aria-label="Día 9"><span>9</span><small>♡</small></button>
-<button class="day " data-day="10" aria-label="Día 10"><span>10</span><small>♡</small></button>
-<button class="day " data-day="11" aria-label="Día 11"><span>11</span><small>♡</small></button>
-<button class="day " data-day="12" aria-label="Día 12"><span>12</span><small>♡</small></button>
-<button class="day " data-day="13" aria-label="Día 13"><span>13</span><small>♡</small></button>
-<button class="day " data-day="14" aria-label="Día 14"><span>14</span><small>♡</small></button>
-<button class="day " data-day="15" aria-label="Día 15"><span>15</span><small>♡</small></button>
-<button class="day " data-day="16" aria-label="Día 16"><span>16</span><small>♡</small></button>
-<button class="day " data-day="17" aria-label="Día 17"><span>17</span><small>♡</small></button>
-<button class="day " data-day="18" aria-label="Día 18"><span>18</span><small>♡</small></button>
-<button class="day " data-day="19" aria-label="Día 19"><span>19</span><small>♡</small></button>
-<button class="day " data-day="20" aria-label="Día 20"><span>20</span><small>♡</small></button>
-<button class="day " data-day="21" aria-label="Día 21"><span>21</span><small>♡</small></button>
-<button class="day " data-day="22" aria-label="Día 22"><span>22</span><small>♡</small></button>
-<button class="day " data-day="23" aria-label="Día 23"><span>23</span><small>♡</small></button>
-<button class="day " data-day="24" aria-label="Día 24"><span>24</span><small>♡</small></button>
-<button class="day " data-day="25" aria-label="Día 25"><span>25</span><small>♡</small></button>
-<button class="day " data-day="26" aria-label="Día 26"><span>26</span><small>♡</small></button>
-<button class="day birthday" data-day="27" aria-label="Día 27"><span>27</span><small>🎂</small></button>
-<button class="day " data-day="28" aria-label="Día 28"><span>28</span><small>♡</small></button>
-<button class="day " data-day="29" aria-label="Día 29"><span>29</span><small>♡</small></button>
-<button class="day " data-day="30" aria-label="Día 30"><span>30</span><small>♡</small></button>
-<button class="day " data-day="31" aria-label="Día 31"><span>31</span><small>♡</small></button></div>
+<div class="calendar" id="calendar"><button class="day " data-day="1" aria-label="Día 1"><span>1</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="2" aria-label="Día 2"><span>2</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="3" aria-label="Día 3"><span>3</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="4" aria-label="Día 4"><span>4</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="5" aria-label="Día 5"><span>5</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="6" aria-label="Día 6"><span>6</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="7" aria-label="Día 7"><span>7</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="8" aria-label="Día 8"><span>8</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="9" aria-label="Día 9"><span>9</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="10" aria-label="Día 10"><span>10</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="11" aria-label="Día 11"><span>11</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="12" aria-label="Día 12"><span>12</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="13" aria-label="Día 13"><span>13</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="14" aria-label="Día 14"><span>14</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="15" aria-label="Día 15"><span>15</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="16" aria-label="Día 16"><span>16</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="17" aria-label="Día 17"><span>17</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="18" aria-label="Día 18"><span>18</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="19" aria-label="Día 19"><span>19</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="20" aria-label="Día 20"><span>20</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="21" aria-label="Día 21"><span>21</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="22" aria-label="Día 22"><span>22</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="23" aria-label="Día 23"><span>23</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="24" aria-label="Día 24"><span>24</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="25" aria-label="Día 25"><span>25</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="26" aria-label="Día 26"><span>26</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day birthday" data-day="27" aria-label="Día 27"><span>27</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="28" aria-label="Día 28"><span>28</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="29" aria-label="Día 29"><span>29</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="30" aria-label="Día 30"><span>30</span><small class="rose" aria-hidden="true"></small></button>
+<button class="day " data-day="31" aria-label="Día 31"><span>31</span><small class="rose" aria-hidden="true"></small></button></div>
 <p class="note">Cada día se desbloquea automáticamente cuando llega su fecha. Los días futuros permanecen en “Próximamente…”.</p>
 </section>
 <footer>Hecho con cariño, un día a la vez 🩷</footer>
@@ -172,7 +188,13 @@ function openDay(d) {
     modal.classList.add('open'); return;
   }
   const title = d === 27 ? '🎂 Feliz cumpleaños, mi Valen 🪐' : `Día ${d}`;
-  content.innerHTML = `<div class="heart-pop" aria-hidden="true">🩷</div><div class="${d===27?'birthdayTitle':''}">${title}</div><div class="message">${messages[d].replace(/\n/g,'<br>')}</div><div class="signature">🪐luisito</div>`;
+  content.innerHTML = `<div class="${d===27?'birthdayTitle':''}">${title}</div>${d===27?'<div class="heart">🩷✨🌸✨🩷</div>':''}<div class="message">${messages[d].replace(/\n/g,'<br>')}</div>`;
+  const dayButton = document.querySelector(`.day[data-day="${d}"]`);
+  document.querySelectorAll('.day.opening').forEach(el => el.classList.remove('opening'));
+  if(dayButton) {
+    dayButton.classList.add('opening');
+    setTimeout(() => dayButton.classList.remove('opening'), 900);
+  }
   modal.classList.add('open');
 }
 document.querySelectorAll('.day').forEach(btn => btn.addEventListener('click', () => openDay(Number(btn.dataset.day))));
